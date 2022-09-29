@@ -1,18 +1,15 @@
-DROP TABLE IF EXISTS board;
-CREATE TABLE board(
-                      boardId int auto_increment,
-                      title varchar (30) not null,
-                      content varchar (30) not null,
-                      name varchar (30) not null,
-                      readd int default 0,
-                      primary key(boardId)
-);
+create table table_board(
+    id bigint(20) not null AUTO_INCREMENT comment 'PK',
+    title varchar(100) not null comment '제목',
+    content varchar(3000) not null comment '내용',
+    writer varchar(20) not null comment '작성자',
+    view_cnt int(11) not null comment '조회 수',
+    notice_yn tinyint(1) not null comment '공지글 여부',
+    delete_yn tinyint(1) not null comment '삭제 여부',
+    created_date datetime not null default current_timestamp() comment '생성일시',
+    modified_date datetime default null comment '최종 수정일시',
+    primary key (id)
+) comment '게시글';
 
-INSERT INTO board(title, content, name) VALUES('title1', 'content1', 'name1');
-INSERT INTO board(title, content, name) VALUES('title2', 'content2', 'name2');
-INSERT INTO board(title, content, name) VALUES('title3', 'content3', 'name3');
-INSERT INTO board(title, content, name) VALUES('title4', 'content4', 'name4');
-INSERT INTO board(title, content, name) VALUES('title5', 'content5', 'name5');
-INSERT INTO board(title, content, name) VALUES('title6', 'content6', 'name6');
-INSERT INTO board(title, content, name) VALUES('title7', 'content7', 'name7');
-INSERT INTO board(title, content, name) VALUES('title8', 'content8', 'name8');
+select * from table_board;
+desc table_board;
