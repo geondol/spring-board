@@ -14,5 +14,4 @@ public class Board {
     private int read;
     private String name;
 
-    private Long memberId;
 }

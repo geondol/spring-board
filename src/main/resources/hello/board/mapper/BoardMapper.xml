@@ -2,17 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hello.board.mapper.BoardMapper">
 
-    <insert id="save" parameterType="hello.board.domain.Board">
-        insert into table_board (title, content, name) values (#{title},#{content},#{name});
+    <insert id="save" parameterType="hello.board.domain.Board" useGeneratedKeys="true" keyProperty="boardId">
+        insert into table_board (title, content, name)
+        values (#{title},#{content},#{name});
     </insert>
+    <!-- insert 메소드는 반환값이 숫자이다 -->
 
     <select id="boardCount" resultType="int">
-        select count(boardId) from table_board;
+        select count(boardId)
+        from table_board;
     </select>
 
-    <!-- 게시글 리스트 조회 -->
     <select id="findAll" resultType="hello.board.domain.Board">
         select *
         from table_board
     </select>
+
+    <select id="findById" parameterType="Long" resultType="hello.board.domain.Board">
+        select *
+        from table_board
+        where boardid = #{boardId}
+    </select>
+    
+    <update id="update" parameterType="hello.board.domain.Board">
+        update table_board
+        set title=#{title},content=#{content},name=#{name}
+        where boardid = #{boardId}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from table_board
+        where boardid = #{a}
+    </delete>
 </mapper>

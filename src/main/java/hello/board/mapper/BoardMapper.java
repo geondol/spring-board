@@ -8,11 +8,11 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    Board save(Board board);
+    void save(Board board);
 
     void deleteById(Long id);
 
-    void update();
+    void update(Board board);
 
     Board findById(Long id);
 

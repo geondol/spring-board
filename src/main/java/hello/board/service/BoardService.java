@@ -20,18 +20,20 @@ public class BoardService {
     private final BoardMapper boardMapper;
 
     @Transactional
-    public Board save(Board board){
-        return boardMapper.save(board);
+    public void save(Board board){
+        boardMapper.save(board);
     }
 
     public Board findById(Long id){
         return boardMapper.findById(id);
     }
 
-    public void update(){
-        boardMapper.update();
+    @Transactional
+    public void update(Board board){
+        boardMapper.update(board);
     }
 
+    @Transactional
     public void deleteById(Long id){
         boardMapper.deleteById(id);
     }
