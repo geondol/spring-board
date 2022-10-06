@@ -39,6 +39,12 @@
         from table_board
         where boardid = #{boardId}
     </select>
+
+    <update id="countUp">
+        update table_board
+        set view_cnt = view_cnt + 1
+        where boardid = #{boardId}
+    </update>
     
     <update id="update" parameterType="hello.board.domain.Board">
         update table_board

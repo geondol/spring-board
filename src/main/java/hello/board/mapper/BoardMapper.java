@@ -20,4 +20,6 @@ public interface BoardMapper {
 
     List<Board> findAll(String title,String name);
 
+    void countUp(Long boardId);
+
 }

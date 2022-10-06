@@ -46,5 +46,8 @@ public class BoardService {
         return boardMapper.findAll(title,name);
     }
 
-
+    @Transactional
+    public void countUp(Long boardId){
+        boardMapper.countUp(boardId);
+    }
 }

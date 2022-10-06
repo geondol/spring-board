@@ -52,7 +52,7 @@
                 <td><a href="board.html" th:href="@{/boards/{boardId}(boardId=${board.boardId})}" th:text="${board.boardId}">게시글 아이디</a></td>
                 <td th:text="${board.title}">제목</td>
                 <td><a href="board.html" th:href="@{|/boards/${board.boardId}|}" th:text="${board.name}">글쓴이</a></td>
-                <td th:text="${board.read}">1</td>
+                <td th:text="${board.viewCnt}">1</td>
             </tr>
             </tbody>
         </table>
