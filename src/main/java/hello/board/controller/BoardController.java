@@ -60,8 +60,10 @@ public class BoardController {
     }
 
     @GetMapping
-    public String main(Model model){
-        model.addAttribute("boards",boardService.boardList());
+    public String main(@RequestParam(required = false) String title,String name, Model model){
+        model.addAttribute("boards",boardService.boardList(title,name));
+        int count = boardService.boardCount(title,name);
+        model.addAttribute("count",count);
         return "/board/boards";
     }
 }

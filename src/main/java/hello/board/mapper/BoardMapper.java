@@ -16,7 +16,8 @@ public interface BoardMapper {
 
     Board findById(Long id);
 
-    int boardCount();
+    int boardCount(String title, String name);
 
-    List<Board> findAll();
+    List<Board> findAll(String title,String name);
+
 }

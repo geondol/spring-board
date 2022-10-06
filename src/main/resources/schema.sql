@@ -20,3 +20,7 @@ drop table table_board;
 select * from table_board;
 desc table_board;
 show variables like 'lower_case_table_names';
+
+select count(boardId)
+from table_board
+where name like concat('%w%');

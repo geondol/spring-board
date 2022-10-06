@@ -38,11 +38,13 @@ public class BoardService {
         boardMapper.deleteById(id);
     }
 
-    public int boardCount(){
-        return boardMapper.boardCount();
+    public int boardCount(String title, String name){
+        return boardMapper.boardCount(title,name);
     }
 
-    public List<Board> boardList(){
-        return boardMapper.findAll();
+    public List<Board> boardList(String title,String name){
+        return boardMapper.findAll(title,name);
     }
+
+
 }
