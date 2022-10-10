@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=fd577e19cb7ef175f39852f37ac912f9&redirect_uri=http://localhost:8080/member/kakao&response_type=code">
+    <img th:src="@{/images/kakao_login_large_wide.png}" style="height:60px"/>
+</a>
+<a href="https://kauth.kakao.com/oauth/logout?client_id=fd577e19cb7ef175f39852f37ac912f9&logout_redirect_uri=http://localhost:8080">로그아웃</a>
+[[${email}]]
+</body>
+</html>
