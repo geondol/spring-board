@@ -1,6 +1,7 @@
 package hello.board.service;
 
 import hello.board.domain.Board;
+import hello.board.domain.Heart;
 import hello.board.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,9 @@ public class BoardService {
     @Transactional
     public void countUp(Long boardId){
         boardMapper.countUp(boardId);
+    }
+
+    public Heart findHeart(Long memberId, Long boardId){
+        return boardMapper.findHeart(memberId,boardId);
     }
 }

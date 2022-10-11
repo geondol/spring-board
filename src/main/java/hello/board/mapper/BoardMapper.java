@@ -1,6 +1,7 @@
 package hello.board.mapper;
 
 import hello.board.domain.Board;
+import hello.board.domain.Heart;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface BoardMapper {
     List<Board> findAll(String title,String name);
 
     void countUp(Long boardId);
+
+    Heart findHeart(Long memberId, Long boardId);
 
 }

@@ -57,4 +57,8 @@
         from table_board
         where boardid = #{a}
     </delete>
+
+    <select id="findHeart" resultType="hello.board.domain.Heart">
+        select * from heart where memberid = #{memberId} and boardid = #{boardId}
+    </select>
 </mapper>

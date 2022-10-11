@@ -7,6 +7,23 @@ create table table_board(
     primary key (boardId)
 );
 
+create table member(
+    memberId bigint auto_increment,
+    id varchar(20) not null unique ,
+    password varchar(16) not null ,
+    name varchar(20) not null ,
+    phone varchar(20) not null ,
+    primary key (memberId)
+);
+
+create table heart(
+    heartId bigint auto_increment,
+    boardId bigint,
+    memberId bigint,
+    heart int,
+    primary key (heartId)
+);
+
 INSERT INTO table_board(title, content, name) VALUES('title1', 'content1', 'name1');
 INSERT INTO table_board(title, content, name) VALUES('title2', 'content2', 'name2');
 INSERT INTO table_board(title, content, name) VALUES('title3', 'content3', 'name3');
@@ -24,3 +41,5 @@ show variables like 'lower_case_table_names';
 select count(boardId)
 from table_board
 where name like concat('%w%');
+
+select * from member;

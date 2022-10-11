@@ -1,6 +1,7 @@
 package hello.board.controller;
 
 import hello.board.domain.Board;
+import hello.board.domain.Heart;
 import hello.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +32,13 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String board(@PathVariable long boardId, Model model){
+    public String board(@PathVariable long boardId, Model model, @RequestParam("memberId") Long memberId ){
         boardService.countUp(boardId);
         model.addAttribute("board",boardService.findById(boardId));
+
+        Heart heart = boardService.findHeart(memberId, boardId);
+        model.addAttribute("heart",heart);
+
         return "/board/board";
     }
 
