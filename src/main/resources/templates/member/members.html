@@ -9,27 +9,18 @@
 
 <div class="container" style="max-width: 650px">
   <div class="py-5 text-center">
-    <h2>게시글 목록</h2>
+    <h2>회원 목록</h2>
   </div>
   <form method="get" class="form-inline">
     <div class="row">
-      <div class="col">
-        <input type="text" name="title" class="form-control" placeholder="제목"/>
-      </div>
-      <div class="col">
-        <input type="text" name="name" class="form-control" placeholder="글쓴이"/>
-      </div>
-      <div class="col">
-        <button type="submit" class="btn btn-secondary mb-2">검색</button>
-      </div>
       <div class="col">
       </div>
 
       <div class="col">
         <button class="btn btn-primary float-end"
                 onclick="location.href='addForm.html'"
-                th:onclick="|location.href='@{/boards/save}'|"
-                type="button">게시글 등록</button>
+                th:onclick="|location.href='@{/members/save}'|"
+                type="button">회원가입</button>
       </div>
     </div>
   </form>
@@ -41,17 +32,19 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>제목</th>
-        <th>글쓴이</th>
-        <th>조회수</th>
+        <th>아이디</th>
+        <th>비밀번호</th>
+        <th>이름</th>
+        <th>전화번호</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="board : ${boards}">
-        <td><a href="board.html" th:href="@{/boards/{boardId}(boardId=${board.boardId})}" th:text="${board.boardId}">게시글 아이디</a></td>
-        <td th:text="${board.title}">제목</td>
-        <td><a href="board.html" th:href="@{|/boards/${board.boardId}|}" th:text="${board.name}">글쓴이</a></td>
-        <td th:text="${board.viewCnt}">1</td>
+      <tr th:each="member : ${members}">
+        <td><a th:href="@{|/members/${member.memberId}|}" th:text="${member.memberId}">회원 번호</a></td>
+        <td><a th:text="${member.id}" th:href="@{|/members/${member.memberId}|}">아이디</a></td>
+        <td th:text="${member.password}">비밀번호</td>
+        <td th:text="${member.name}">이름</td>
+        <td th:text="${member.phone}">전화번호</td>
       </tr>
       </tbody>
     </table>
