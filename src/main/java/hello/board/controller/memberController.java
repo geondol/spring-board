@@ -30,8 +30,7 @@ public class memberController {
     public String login(@ModelAttribute Member member, HttpServletRequest request){
         Member findMember = memberService.login(member);
         String password = member.getPassword();
-        log.info("input password = {}",password);
-        log.info("findMember = {}",findMember.getPassword());
+
         if (password.equals(findMember.getPassword())) {
             HttpSession session = request.getSession();
             session.setAttribute("loginMember",findMember.getId());
@@ -39,6 +38,15 @@ public class memberController {
         }else {
             return "member/passwordError";
         }
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if (session != null){
+            session.invalidate();//세션 삭제
+        }
+        return "/board/boards";
     }
 
     @GetMapping("/save")

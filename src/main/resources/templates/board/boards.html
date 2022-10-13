@@ -11,7 +11,20 @@
     <div class="py-5 text-center">
         <h2>게시글 목록</h2>
     </div>
-    <div th:text="|${login}님 안녕하세요|"></div>
+    <div class="col" th:text="|${login}님 안녕하세요|"></div>
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <form th:action="@{/members/logout}" method="post">
+                <button class="w-100 btn btn-dark btn-lg" onclick="location.href='items.html'" type="submit">
+                    로그아웃
+                </button>
+            </form>
+        </div>
+    </div>
+    <br>
+
     <form method="get" class="form-inline">
     <div class="row">
         <div class="col">
