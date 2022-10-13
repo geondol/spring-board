@@ -24,6 +24,10 @@ create table heart(
     primary key (heartId)
 );
 
+select * from member where id='keedob';
+select * from heart;
+insert into heart(boardId, memberId, heart) values(1,1,0);
+
 INSERT INTO table_board(title, content, name) VALUES('title1', 'content1', 'name1');
 INSERT INTO table_board(title, content, name) VALUES('title2', 'content2', 'name2');
 INSERT INTO table_board(title, content, name) VALUES('title3', 'content3', 'name3');

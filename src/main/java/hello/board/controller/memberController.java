@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,6 +20,26 @@ import java.util.List;
 public class memberController {
 
     private final MemberService memberService;
+
+    @GetMapping("/login")
+    public String login(){
+        return "member/login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute Member member, HttpServletRequest request){
+        Member findMember = memberService.login(member);
+        String password = member.getPassword();
+        log.info("input password = {}",password);
+        log.info("findMember = {}",findMember.getPassword());
+        if (password.equals(findMember.getPassword())) {
+            HttpSession session = request.getSession();
+            session.setAttribute("loginMember",findMember.getId());
+            return "redirect:/boards";
+        }else {
+            return "member/passwordError";
+        }
+    }
 
     @GetMapping("/save")
     public String signUp(){

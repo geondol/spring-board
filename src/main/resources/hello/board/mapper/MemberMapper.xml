@@ -16,4 +16,9 @@
         from member
         where memberid = #{memberId}
     </select>
+
+    <select id="login" resultType="hello.board.domain.Member">
+        select * from member
+        where id=#{id}
+    </select>
 </mapper>

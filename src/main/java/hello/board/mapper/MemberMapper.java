@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
 
+    Member login(Member member);
+
     void save(Member member);
 
     Member findById(Long id);

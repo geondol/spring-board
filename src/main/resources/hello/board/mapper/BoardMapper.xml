@@ -61,4 +61,13 @@
     <select id="findHeart" resultType="hello.board.domain.Heart">
         select * from heart where memberid = #{memberId} and boardid = #{boardId}
     </select>
+
+    <insert id="insertHeart">
+        insert into heart(boardid, memberid , heart)
+        values(#{boardId}, #{memberId}, 1)
+    </insert>
+
+    <delete id="deleteHeart">
+        delete from heart where boardid=#{boardId} and memberid=#{memberId}
+    </delete>
 </mapper>

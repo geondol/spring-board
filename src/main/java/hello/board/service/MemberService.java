@@ -13,6 +13,10 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
 
+    public Member login(Member member){
+        return memberMapper.login(member);
+    }
+
     public void save(Member member){
         memberMapper.save(member);
     }

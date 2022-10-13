@@ -25,4 +25,8 @@ public interface BoardMapper {
 
     Heart findHeart(Long memberId, Long boardId);
 
+    int insertHeart(Heart heart);
+
+    void deleteHeart(Heart heart);
+
 }

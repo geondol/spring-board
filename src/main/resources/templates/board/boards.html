@@ -11,6 +11,7 @@
     <div class="py-5 text-center">
         <h2>게시글 목록</h2>
     </div>
+    <div th:text="|${login}님 안녕하세요|"></div>
     <form method="get" class="form-inline">
     <div class="row">
         <div class="col">
@@ -51,7 +52,7 @@
             <tr th:each="board : ${boards}">
                 <td><a href="board.html" th:href="@{/boards/{boardId}(boardId=${board.boardId})}" th:text="${board.boardId}">게시글 아이디</a></td>
                 <td th:text="${board.title}">제목</td>
-                <td><a href="board.html" th:href="@{|/boards/${board.boardId}|}" th:text="${board.name}">글쓴이</a></td>
+                <td><a href="board.html" th:href="@{|/boards/${board.boardId}?memberId=1|}" th:text="${board.name}">글쓴이</a></td>
                 <td th:text="${board.viewCnt}">1</td>
             </tr>
             </tbody>

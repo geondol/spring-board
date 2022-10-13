@@ -18,6 +18,52 @@
 
     <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
 
+    <div>
+        <a class="text-dark heart" style="text-decoration-line: none;">
+            <img id="heart" src="/icon/heart.svg">
+            좋아요
+        </a>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+
+        // 좋아요가 있는지 확인한 값을 heartval에 저장
+        var heartval = [[${heart.heart}]]
+        // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
+        if(heartval>0) {
+            console.log(heartval);
+            $("#heart").prop("src", "/icon/heart-fill.svg");
+            $(".heart").prop('name',heartval)
+        }
+        else {
+            console.log(heartval);
+            $("#heart").prop("src", "/icon/heart.svg");
+            $(".heart").prop('name',heartval)
+        }
+
+        // 좋아요 버튼을 클릭 시 실행되는 코드
+        $(".heart").on("click", function () {
+            var that = $(".heart");
+            let ajax = $.ajax({
+                url :'/boards/heart',
+                type :'POST',
+                data : {'boardId':[[${board.boardId}]], 'memberId': 1},
+                success : function(data){
+                    that.prop('name',data);
+                    if(data==1) {
+                        $('#heart').prop("src","/icon/heart-fill.svg");
+                    } else {
+                        $('#heart').prop("src","/icon/heart.svg");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
 
     <div>
         <label for="boardId">게시판 ID</label>
