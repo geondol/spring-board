@@ -27,11 +27,16 @@ public class memberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute Member member, HttpServletRequest request){
+    public String login(@ModelAttribute Member member, HttpServletRequest request,RedirectAttributes redirectAttributes){
         Member findMember = memberService.login(member);
         String password = member.getPassword();
 
         if (password.equals(findMember.getPassword())) {
+            //로그인한 아이디의 memberId를 가져온다
+            Long memberId = findMember.getMemberId();
+            //memberId를 /boards로 보냄
+            redirectAttributes.addAttribute("memberId",memberId);
+
             HttpSession session = request.getSession();
             session.setAttribute("loginMember",findMember.getId());
             return "redirect:/boards";
@@ -46,7 +51,7 @@ public class memberController {
         if (session != null){
             session.invalidate();//세션 삭제
         }
-        return "/board/boards";
+        return "redirect:/members/login";
     }
 
     @GetMapping("/save")

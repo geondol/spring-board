@@ -2,7 +2,9 @@ package hello.board.controller;
 
 import hello.board.domain.Board;
 import hello.board.domain.Heart;
+import hello.board.domain.Member;
 import hello.board.service.BoardService;
+import hello.board.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 public class BoardController {
 
     private final BoardService boardService;
+    private final MemberService memberService;
 
     @GetMapping("/save")
     public String save(){
@@ -35,12 +38,20 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String board(@PathVariable long boardId, Model model, @RequestParam("memberId") Long memberId ){
+    public String board(@PathVariable long boardId, @RequestParam("memberId") Long memberId , Model model,HttpServletRequest request ){
         boardService.countUp(boardId);
         model.addAttribute("board",boardService.findById(boardId));
 
-        Heart heart = boardService.findHeart(memberId, boardId);
+        //세션으로 저장된 아이디 가져오기
+        HttpSession session = request.getSession();
+        Object loginMember = session.getAttribute("loginMember");
+        log.info("로그인한 아이디 = {}",loginMember);
+
+        log.info("memberId ={}",memberId);
+
+        int heart = boardService.findHeart(memberId, boardId);
         model.addAttribute("heart",heart);
+        model.addAttribute("memberId",memberId);
         log.info("heart = {}",heart);
 
         return "/board/board";
@@ -70,13 +81,14 @@ public class BoardController {
     }
 
     @GetMapping
-    public String main(@RequestParam(required = false) String title, String name, Model model, HttpServletRequest request){
+    public String main(@RequestParam(required = false) String title,@RequestParam(value = "memberId",required = false) Long memberId, String name, Model model, HttpServletRequest request){
         model.addAttribute("boards",boardService.boardList(title,name));
         int count = boardService.boardCount(title,name);
         model.addAttribute("count",count);
         HttpSession session = request.getSession();
         Object loginMember = session.getAttribute("loginMember");
         model.addAttribute("login",loginMember);
+        model.addAttribute("memberId",memberId);
         return "/board/boards";
     }
 

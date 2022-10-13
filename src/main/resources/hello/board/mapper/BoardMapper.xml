@@ -58,11 +58,11 @@
         where boardid = #{a}
     </delete>
 
-    <select id="findHeart" resultType="hello.board.domain.Heart">
-        select * from heart where memberid = #{memberId} and boardid = #{boardId}
+    <select id="findHeart" resultType="int">
+        select count(*) from heart where memberid = #{memberId} and boardid = #{boardId}
     </select>
 
-    <insert id="insertHeart">
+    <insert id="insertHeart" useGeneratedKeys="true" keyProperty="heartId">
         insert into heart(boardid, memberid , heart)
         values(#{boardId}, #{memberId}, 1)
     </insert>

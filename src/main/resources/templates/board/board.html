@@ -31,7 +31,7 @@
     $(document).ready(function () {
 
         // 좋아요가 있는지 확인한 값을 heartval에 저장
-        var heartval = [[${heart.heart}]]
+        var heartval = [[${heart}]]
         // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
         if(heartval>0) {
             console.log(heartval);
@@ -50,7 +50,7 @@
             let ajax = $.ajax({
                 url :'/boards/heart',
                 type :'POST',
-                data : {'boardId':[[${board.boardId}]], 'memberId': 1},
+                data : {'boardId':[[${board.boardId}]], 'memberId': [[${memberId}]]},
                 success : function(data){
                     that.prop('name',data);
                     if(data==1) {

@@ -23,7 +23,7 @@ public interface BoardMapper {
 
     void countUp(Long boardId);
 
-    Heart findHeart(Long memberId, Long boardId);
+    int findHeart(Long memberId, Long boardId);
 
     int insertHeart(Heart heart);
 

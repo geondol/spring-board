@@ -52,7 +52,7 @@ public class BoardService {
         boardMapper.countUp(boardId);
     }
 
-    public Heart findHeart(Long memberId, Long boardId){
+    public int findHeart(Long memberId, Long boardId){
         return boardMapper.findHeart(memberId,boardId);
     }
 
@@ -61,11 +61,11 @@ public class BoardService {
         // 좋아요가 DB에 저장이 되는것이 없으면 0이 그대로 리턴으로 넘어감
         int result = 0;
         // 좋아요가 이미 있는지 확인하는 코드
-        Heart find = boardMapper.findHeart(heart.getMemberId(), heart.getBoardId());
+        int find = boardMapper.findHeart(heart.getMemberId(), heart.getBoardId());
 
         // find가 null이면 좋아요가 없는 상태이므로 정보 저장
         // find가 null이 아니면 좋아요가 있는 상태이므로 정보 삭제
-        if(find==null) {
+        if(find==0) {
             // insert의 리턴값은 DB에 성공적으로 insert된 갯수를 보내므로 result가 1이 됨
             result = boardMapper.insertHeart(heart);
         } else {
