@@ -3,6 +3,8 @@ package hello.board.controller;
 import hello.board.domain.Board;
 import hello.board.domain.Heart;
 import hello.board.domain.Member;
+import hello.board.domain.file.File;
+import hello.board.domain.file.UploadFile;
 import hello.board.service.BoardService;
 import hello.board.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +32,7 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Board board, RedirectAttributes redirectAttributes){
+    public String save(@ModelAttribute Board board, @ModelAttribute File form, RedirectAttributes redirectAttributes){
         boardService.save(board);
         redirectAttributes.addAttribute("boardId", board.getBoardId());
         redirectAttributes.addAttribute("status", true);
@@ -105,4 +107,5 @@ public class BoardController {
         model.addAttribute("test", a);
         return "board/test";
     }
+
 }

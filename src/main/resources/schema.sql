@@ -24,6 +24,13 @@ create table heart(
     primary key (heartId)
 );
 
+create table file(
+    fileId bigint auto_increment,
+    uploadfilename varchar(100),
+    dbfilename varchar(100),
+    primary key (fileId)
+);
+
 select * from member where id='keedob';
 select * from heart;
 insert into heart(boardId, memberId, heart) values(1,1,0);
