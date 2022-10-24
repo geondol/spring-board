@@ -4,6 +4,7 @@ import hello.board.domain.Board;
 import hello.board.domain.Heart;
 import hello.board.domain.Member;
 import hello.board.domain.file.File;
+import hello.board.domain.file.FileStore;
 import hello.board.domain.file.UploadFile;
 import hello.board.service.BoardService;
 import hello.board.service.MemberService;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,7 +27,7 @@ import javax.servlet.http.HttpSession;
 public class BoardController {
 
     private final BoardService boardService;
-    private final MemberService memberService;
+    private final FileStore fileStore;
 
     @GetMapping("/save")
     public String save(){
@@ -32,7 +35,13 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Board board, @ModelAttribute File form, RedirectAttributes redirectAttributes){
+    public String save(@ModelAttribute Board board, @ModelAttribute File form, RedirectAttributes redirectAttributes) throws IOException {
+
+        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
+        log.info("컨트롤러에서 들어온 파일 이름 = {}",storeImageFiles);
+
+        boardService.filesave(storeImageFiles);
+
         boardService.save(board);
         redirectAttributes.addAttribute("boardId", board.getBoardId());
         redirectAttributes.addAttribute("status", true);

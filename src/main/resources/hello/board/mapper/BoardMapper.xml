@@ -70,4 +70,8 @@
     <delete id="deleteHeart">
         delete from heart where boardid=#{boardId} and memberid=#{memberId}
     </delete>
+
+    <insert id="filesave">
+        insert into file(uploadfilename,dbfilename) values (#{uploadFileName},#{dbFileName})
+    </insert>
 </mapper>
