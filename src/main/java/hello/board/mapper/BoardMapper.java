@@ -31,6 +31,6 @@ public interface BoardMapper {
 
     void deleteHeart(Heart heart);
 
-    void filesave(List<UploadFile> uploadFile);
+    void filesave(File file);
 
 }

@@ -2,6 +2,7 @@ package hello.board.service;
 
 import hello.board.domain.Board;
 import hello.board.domain.Heart;
+import hello.board.domain.file.File;
 import hello.board.domain.file.UploadFile;
 import hello.board.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
@@ -80,7 +81,7 @@ public class BoardService {
         boardMapper.deleteHeart(heart);
     }
 
-    public void filesave(List<UploadFile> uploadFile){
-        boardMapper.filesave(uploadFile);
+    public void filesave(File file){
+        boardMapper.filesave(file);
     }
 }

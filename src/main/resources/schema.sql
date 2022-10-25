@@ -31,6 +31,7 @@ create table file(
     primary key (fileId)
 );
 
+select * from file;
 select * from member where id='keedob';
 select * from heart;
 insert into heart(boardId, memberId, heart) values(1,1,0);

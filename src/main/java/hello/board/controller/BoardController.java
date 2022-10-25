@@ -35,12 +35,14 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Board board, @ModelAttribute File form, RedirectAttributes redirectAttributes) throws IOException {
+    public String save(@ModelAttribute Board board,@ModelAttribute File form, RedirectAttributes redirectAttributes) throws IOException {
 
+        //filename이 안넘어옴 확인해야함
+        log.info("asd = {}",form);
         List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
         log.info("컨트롤러에서 들어온 파일 이름 = {}",storeImageFiles);
 
-        boardService.filesave(storeImageFiles);
+        boardService.filesave(form);//여기서 에러남
 
         boardService.save(board);
         redirectAttributes.addAttribute("boardId", board.getBoardId());
