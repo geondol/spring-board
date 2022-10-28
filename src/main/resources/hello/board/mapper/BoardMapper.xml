@@ -71,7 +71,7 @@
         delete from heart where boardid=#{boardId} and memberid=#{memberId}
     </delete>
 
-    <insert id="filesave" parameterType="hello.board.domain.file.File">
-        insert into file(uploadfilename,dbfilename) values (#{uploadFileName},#{dbFileName})
+    <insert id="filesave">
+        insert into file(uploadfilename,dbfilename) values (#{param1},#{param2})
     </insert>
 </mapper>

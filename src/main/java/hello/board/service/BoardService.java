@@ -2,8 +2,6 @@ package hello.board.service;
 
 import hello.board.domain.Board;
 import hello.board.domain.Heart;
-import hello.board.domain.file.File;
-import hello.board.domain.file.UploadFile;
 import hello.board.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -81,7 +79,8 @@ public class BoardService {
         boardMapper.deleteHeart(heart);
     }
 
-    public void filesave(File file){
-        boardMapper.filesave(file);
+    @Transactional
+    public void filesave(String originName,String dbName){
+        boardMapper.filesave(originName,dbName);
     }
 }

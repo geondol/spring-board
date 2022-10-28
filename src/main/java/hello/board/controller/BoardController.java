@@ -2,12 +2,10 @@ package hello.board.controller;
 
 import hello.board.domain.Board;
 import hello.board.domain.Heart;
-import hello.board.domain.Member;
-import hello.board.domain.file.File;
+import hello.board.domain.file.FileForm;
 import hello.board.domain.file.FileStore;
 import hello.board.domain.file.UploadFile;
 import hello.board.service.BoardService;
-import hello.board.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -35,14 +33,17 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Board board,@ModelAttribute File form, RedirectAttributes redirectAttributes) throws IOException {
+    public String save(@ModelAttribute Board board, @ModelAttribute FileForm form, RedirectAttributes redirectAttributes) throws IOException {
 
         //filename이 안넘어옴 확인해야함
         log.info("asd = {}",form);
         List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
         log.info("컨트롤러에서 들어온 파일 이름 = {}",storeImageFiles);
-
-        boardService.filesave(form);//여기서 에러남
+        for (int i=0; i<storeImageFiles.size(); i++){
+            String uploadFileName = storeImageFiles.get(i).getUploadFileName();
+            String dbFileName = storeImageFiles.get(i).getDbFileName();
+            boardService.filesave(uploadFileName,dbFileName);
+        }
 
         boardService.save(board);
         redirectAttributes.addAttribute("boardId", board.getBoardId());
@@ -51,7 +52,7 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String board(@PathVariable long boardId, @RequestParam("memberId") Long memberId , Model model,HttpServletRequest request ){
+    public String board(@PathVariable long boardId, @RequestParam(value = "memberId",required = false) Long memberId , Model model,HttpServletRequest request ){
         boardService.countUp(boardId);
         model.addAttribute("board",boardService.findById(boardId));
 

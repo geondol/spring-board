@@ -2,8 +2,6 @@ package hello.board.mapper;
 
 import hello.board.domain.Board;
 import hello.board.domain.Heart;
-import hello.board.domain.file.File;
-import hello.board.domain.file.UploadFile;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -31,6 +29,6 @@ public interface BoardMapper {
 
     void deleteHeart(Heart heart);
 
-    void filesave(File file);
+    void filesave(String originName,String dbName);
 
 }
